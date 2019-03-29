@@ -29,7 +29,10 @@ while stars_remaining:
 	
 	req = urllib2.Request(query_url)
 	req.add_header('Accept', 'application/vnd.github.v3.star+json')
-	response = urllib2.urlopen(req)
+        try:
+	    response = urllib2.urlopen(req)
+        except:
+            pass
 	data = json.loads(response.read())
 	
 	for user in data:
@@ -68,7 +71,10 @@ with open('%s-stargazers.csv' % repo.split('/')[1], 'wb') as stars:
 		query_url = "https://api.github.com/users/%s?access_token=%s" % (username, access_token)
 	
 		req = urllib2.Request(query_url)
-		response = urllib2.urlopen(req)
+                try:
+		    response = urllib2.urlopen(req)
+                except:
+                    pass
 		data = json.loads(response.read())
 		
 		user_id = data['id']
